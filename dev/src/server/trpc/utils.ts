@@ -4,4 +4,4 @@ import type { IContext } from "./context";
 export const t = initTRPC.context<IContext>().create();
 
 export const { router } = t;
-export const {procedure} = t;
+export const { procedure } = t;
