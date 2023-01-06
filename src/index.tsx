@@ -43,7 +43,11 @@ const relayout: RelayoutFn = (
   ratio,
   wrapper = document.querySelector<WrapperHTMLElement>(`[data-br="${id}"]`)!,
 ) => {
-  const container = wrapper.parentElement!;
+  const container = wrapper.parentElement;
+
+  if (container == null) {
+    return;
+  }
 
   const update = (width: number) => (wrapper.style.maxWidth = width + "px");
 
@@ -98,7 +102,7 @@ const createScriptElement = (injected: boolean, suffix?: string) => (
  * Balancer components can share it.
  */
 const BalancerContext = createContext<boolean>(false);
-const Provider: Component<{
+export const Provider: Component<{
   children?: JSX.Element;
 }> = (props) => {
   return (
@@ -109,29 +113,37 @@ const Provider: Component<{
   );
 };
 
-function Balancer(_props: BalancerProps) {
+export function Balancer(_props: BalancerProps) {
   const mergedProps = mergeProps({ as: "span", ratio: 1 }, _props);
   const [props, restProps] = splitProps(mergedProps, ["as", "ratio", "children"]);
 
   const id = createUniqueId();
-
-  let wrapperRef: WrapperHTMLElement = null!;
+  let wrapperRef: WrapperHTMLElement | null = null;
 
   const hasProvider = useContext(BalancerContext);
 
   // Re-balance on content change and on mount/hydration.
   createEffect(() => {
+    if (wrapperRef == null) {
+      return;
+    }
     // Re-assign the function here as the component can be dynamically rendered, and script tag won't work in that case.
     (self[SYMBOL_KEY] = relayout)(0, props.ratio, wrapperRef);
   });
 
   // Remove the observer when unmounting.
   onCleanup(() => {
-    const resizeObserver = wrapperRef[SYMBOL_OBSERVER_KEY];
-    if (resizeObserver) {
-      resizeObserver.disconnect();
-      delete wrapperRef[SYMBOL_OBSERVER_KEY];
+    if (wrapperRef == null) {
+      return;
     }
+
+    const resizeObserver = wrapperRef[SYMBOL_OBSERVER_KEY];
+    if (resizeObserver == null) {
+      return;
+    }
+
+    resizeObserver.disconnect();
+    delete wrapperRef[SYMBOL_OBSERVER_KEY];
   });
 
   return (
@@ -154,6 +166,3 @@ function Balancer(_props: BalancerProps) {
     </>
   );
 }
-
-export default Balancer;
-export { Provider };
