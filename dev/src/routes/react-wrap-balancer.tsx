@@ -166,14 +166,16 @@ export default function ReactWrapBalancer() {
           align="center"
           a={
             <div class="item">
-              <h2>React: A JavaScript library for building user interfaces</h2>
+              <h2>SolidJS: Simple and performant reactivity for building user interfaces.</h2>
               {content}
             </div>
           }
           b={
             <div class="item">
               <h2>
-                <Balancer>React: A JavaScript library for building user interfaces</Balancer>
+                <Balancer>
+                  SolidJS: Simple and performant reactivity for building user interfaces.
+                </Balancer>
               </h2>
               {content}
             </div>
