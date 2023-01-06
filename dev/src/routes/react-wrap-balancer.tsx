@@ -8,7 +8,7 @@ import CopyIcon from "~/assets/copy.svg";
 import GithubIcon from "~/assets/github.svg";
 import TooltipArrowIcon from "~/assets/tooltip-arrow.svg";
 import TooltipTriggerIcon from "~/assets/tooltip-tigger.svg";
-import { Balancer, Provider } from "../../../src";
+import { Balancer, BalancerProvider } from "../../../src";
 
 const content = (
   <>
@@ -156,7 +156,7 @@ export default function ReactWrapBalancer() {
   let pointerPos = { x: -1, y: -1 };
 
   return (
-    <Provider>
+    <BalancerProvider>
       <main>
         <div class="logo-container">
           <a
@@ -249,17 +249,17 @@ export default function ReactWrapBalancer() {
             <span class="code">{`<Balancer>`}</span>:
           </span>
           <code>
-            {highlightedCode`import ${"Balancer"} from ${"'react-wrap-balancer'"}\n\n// ...\n\n<h1>\n  ${"<Balancer>My Title</Balancer>"}\n</h1>`}
+            {highlightedCode`import { ${"Balancer"} } from ${"'react-wrap-balancer'"}\n\n// ...\n\n<h1>\n  ${"<Balancer>My Title</Balancer>"}\n</h1>`}
           </code>
           <span>
             If you have multiple <span class="code">{`<Balancer>`}</span>{" "}
             components used, it’s recommended (but optional) to use{" "}
-            <span class="code">{`<Provider>`}</span> to wrap the entire app.
-            This will make them share the re-balance logic and reduce the HTML
-            size:
+            <span class="code">{`<BalancerProvider>`}</span> to wrap the entire
+            app. This will make them share the re-balance logic and reduce the
+            HTML size:
           </span>
           <code>
-            {highlightedCode`import { ${"Provider"} } from ${"'react-wrap-balancer'"}\n\n// ...\n\n${"<Provider>"}\n  <App/>\n${"</Provider>"}`}
+            {highlightedCode`import { ${"BalancerProvider"} } from ${"'react-wrap-balancer'"}\n\n// ...\n\n${"<BalancerProvider>"}\n  <App/>\n${"</BalancerProvider>"}`}
           </code>
         </p>
         <div class="p">
@@ -598,6 +598,6 @@ export default function ReactWrapBalancer() {
         {/*  </a>*/}
         {/*</p>*/}
       </main>
-    </Provider>
+    </BalancerProvider>
   );
 }
