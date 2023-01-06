@@ -138,7 +138,7 @@ function Ratio() {
   );
 }
 
-export default function ReactWrapBalancer () {
+export default function ReactWrapBalancer() {
   const [copying, setCopying] = createSignal(0);
   let pointerPos = { x: -1, y: -1 };
 
