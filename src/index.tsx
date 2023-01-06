@@ -1,13 +1,13 @@
 import type { Component, JSX, JSXElement } from "solid-js";
 import {
-  createUniqueId,
-  useContext,
   createContext,
   createEffect,
+  createSignal,
+  createUniqueId,
   mergeProps,
   onCleanup,
   splitProps,
-  createSignal,
+  useContext,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
@@ -35,7 +35,11 @@ type WrapperHTMLElement = HTMLElement & {
   dataset: { brr?: number };
 };
 
-type RelayoutFn = (id: number | string, ratio: number, Wrapper?: WrapperHTMLElement) => void;
+type RelayoutFn = (
+  id: number | string,
+  ratio: number,
+  Wrapper?: WrapperHTMLElement
+) => void;
 
 declare global {
   interface Window {
@@ -46,7 +50,7 @@ declare global {
 const relayout: RelayoutFn = (
   id,
   ratio,
-  wrapper = document.querySelector<WrapperHTMLElement>(`[data-br="${id}"]`)!,
+  wrapper = document.querySelector<WrapperHTMLElement>(`[data-br="${id}"]`)!
 ) => {
   const container = wrapper.parentElement;
 
@@ -120,11 +124,17 @@ export const BalancerProvider: Component<{
 
 export function Balancer(_props: BalancerProps) {
   const mergedProps = mergeProps({ as: "span", ratio: 1 }, _props);
-  const [props, restProps] = splitProps(mergedProps, ["as", "ratio", "children"]);
+  const [props, restProps] = splitProps(mergedProps, [
+    "as",
+    "ratio",
+    "children",
+  ]);
 
   const id = createUniqueId();
 
-  const [wrapperRef, setWrapperRef] = createSignal<WrapperHTMLElement | undefined>();
+  const [wrapperRef, setWrapperRef] = createSignal<
+    WrapperHTMLElement | undefined
+  >();
 
   const hasProvider = useContext(BalancerContext);
 
@@ -170,7 +180,10 @@ export function Balancer(_props: BalancerProps) {
       >
         {props.children}
       </Dynamic>
-      {createScriptElement(hasProvider, `self.${SYMBOL_KEY}("${id}",${props.ratio})`)}
+      {createScriptElement(
+        hasProvider,
+        `self.${SYMBOL_KEY}("${id}",${props.ratio})`
+      )}
     </>
   );
 }

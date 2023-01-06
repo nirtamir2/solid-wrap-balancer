@@ -1,14 +1,14 @@
 "use client";
 
 import copy from "copy-to-clipboard";
-import { Balancer, Provider } from "../../../src";
+import { JSX, Show, createSignal, mergeProps } from "solid-js";
 import { animated, createSpring } from "solid-spring";
-import { createSignal, JSX, mergeProps, Show } from "solid-js";
-import TooltipTriggerIcon from "~/assets/tooltip-tigger.svg";
-import GithubIcon from "~/assets/github.svg";
-import CopyIcon from "~/assets/copy.svg";
 import Copiedcon from "~/assets/copied.svg";
+import CopyIcon from "~/assets/copy.svg";
+import GithubIcon from "~/assets/github.svg";
 import TooltipArrowIcon from "~/assets/tooltip-arrow.svg";
+import TooltipTriggerIcon from "~/assets/tooltip-tigger.svg";
+import { Balancer, Provider } from "../../../src";
 
 const content = (
   <>
@@ -32,7 +32,11 @@ function highlightedCode(fades: Array<string>, ...highlighted: Array<string>) {
   return elements;
 }
 
-function Comparison(_props: { a: JSX.Element; b: JSX.Element; align?: "left" | "start" }) {
+function Comparison(_props: {
+  a: JSX.Element;
+  b: JSX.Element;
+  align?: "left" | "start";
+}) {
   const [myWidth, setMyWidth] = createSignal(0.55);
   const styles = createSpring(() => ({
     width: myWidth(),
@@ -55,7 +59,9 @@ function Comparison(_props: { a: JSX.Element; b: JSX.Element; align?: "left" | "
         fallback={
           <animated.div
             style={{
-              width: styles().width.to((v) => `calc(${v * 100}% + ${1 - v} * var(--w0))`),
+              width: styles().width.to(
+                (v) => `calc(${v * 100}% + ${1 - v} * var(--w0))`
+              ),
               "text-align": props.align,
             }}
             class="demo"
@@ -71,17 +77,24 @@ function Comparison(_props: { a: JSX.Element; b: JSX.Element; align?: "left" | "
           </animated.div>
         }
       >
-        <div style={{ width: `calc(55% + 144px)`, "text-align": props.align }} class="demo">
+        <div
+          style={{ width: `calc(55% + 144px)`, "text-align": props.align }}
+          class="demo"
+        >
           <div>
             <legend>Default</legend>
             {props.a(
-              styles().width.to((v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`),
+              styles().width.to(
+                (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
+              )
             )}
           </div>
           <div>
             <legend>With Balancer</legend>
             {props.b(
-              styles().width.to((v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`),
+              styles().width.to(
+                (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
+              )
             )}
           </div>
         </div>
@@ -160,13 +173,18 @@ export default function ReactWrapBalancer() {
           </a>
         </div>
         <p class="headline">
-          <Balancer>Simple React Component That Makes Titles More Readable</Balancer>
+          <Balancer>
+            Simple React Component That Makes Titles More Readable
+          </Balancer>
         </p>
         <Comparison
           align="center"
           a={
             <div class="item">
-              <h2>SolidJS: Simple and performant reactivity for building user interfaces.</h2>
+              <h2>
+                SolidJS: Simple and performant reactivity for building user
+                interfaces.
+              </h2>
               {content}
             </div>
           }
@@ -174,7 +192,8 @@ export default function ReactWrapBalancer() {
             <div class="item">
               <h2>
                 <Balancer>
-                  SolidJS: Simple and performant reactivity for building user interfaces.
+                  SolidJS: Simple and performant reactivity for building user
+                  interfaces.
                 </Balancer>
               </h2>
               {content}
@@ -182,7 +201,9 @@ export default function ReactWrapBalancer() {
           }
         />
         <h3>
-          <Balancer>React Wrap Balancer avoids single hanging word on the last line</Balancer>
+          <Balancer>
+            React Wrap Balancer avoids single hanging word on the last line
+          </Balancer>
         </h3>
         <p class="headline">
           <Balancer>Getting Started</Balancer>
@@ -231,9 +252,11 @@ export default function ReactWrapBalancer() {
             {highlightedCode`import ${"Balancer"} from ${"'react-wrap-balancer'"}\n\n// ...\n\n<h1>\n  ${"<Balancer>My Title</Balancer>"}\n</h1>`}
           </code>
           <span>
-            If you have multiple <span class="code">{`<Balancer>`}</span> components used, it’s
-            recommended (but optional) to use <span class="code">{`<Provider>`}</span> to wrap the
-            entire app. This will make them share the re-balance logic and reduce the HTML size:
+            If you have multiple <span class="code">{`<Balancer>`}</span>{" "}
+            components used, it’s recommended (but optional) to use{" "}
+            <span class="code">{`<Provider>`}</span> to wrap the entire app.
+            This will make them share the re-balance logic and reduce the HTML
+            size:
           </span>
           <code>
             {highlightedCode`import { ${"Provider"} } from ${"'react-wrap-balancer'"}\n\n// ...\n\n${"<Provider>"}\n  <App/>\n${"</Provider>"}`}
@@ -298,21 +321,27 @@ export default function ReactWrapBalancer() {
         <Ratio />
         <h3>
           <Balancer>
-            Adjust the balance ratio to a custom value between <span class="code">0</span> (loose)
-            and <span class="code">1</span> (compact, the default)
+            Adjust the balance ratio to a custom value between{" "}
+            <span class="code">0</span> (loose) and <span class="code">1</span>{" "}
+            (compact, the default)
           </Balancer>
         </h3>
         <p class="headline">
           <Balancer>How Does It Work?</Balancer>
         </p>
         <p>
-          React Wrap Balancer reduces the width of the content wrapper as much as it could, before
-          causing an extra line break. When reaching the minimum width, each line will approximately
-          have the same width, and look more compact and balanced.
+          React Wrap Balancer reduces the width of the content wrapper as much
+          as it could, before causing an extra line break. When reaching the
+          minimum width, each line will approximately have the same width, and
+          look more compact and balanced.
         </p>
         <p>
           Check out the{" "}
-          <a href="https://github.com/shuding/react-wrap-balancer" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/shuding/react-wrap-balancer"
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub Repository
           </a>{" "}
           to lear3 more.
@@ -342,7 +371,8 @@ export default function ReactWrapBalancer() {
                 <animated.div style={{ width }}>
                   <div class="tooltip item">
                     <Balancer>
-                      This deployment is currently in progress. <a>Read more</a>.
+                      This deployment is currently in progress. <a>Read more</a>
+                      .
                     </Balancer>
                   </div>
                 </animated.div>
@@ -360,14 +390,18 @@ export default function ReactWrapBalancer() {
         <Comparison
           a={
             <>
-              <h2 class="item">第六個沉思：論物質性東西的存在；論人的靈魂和肉體之間的實在區別</h2>
+              <h2 class="item">
+                第六個沉思：論物質性東西的存在；論人的靈魂和肉體之間的實在區別
+              </h2>
               {content}
             </>
           }
           b={
             <>
               <h2 class="item">
-                <Balancer>第六個沉思：論物質性東西的存在；論人的靈魂和肉體之間的實在區別</Balancer>
+                <Balancer>
+                  第六個沉思：論物質性東西的存在；論人的靈魂和肉體之間的實在區別
+                </Balancer>
               </h2>
               {content}
             </>
@@ -380,10 +414,10 @@ export default function ReactWrapBalancer() {
           a={
             <blockquote class="item">
               <span>
-                You have wakened not out of sleep, but into a prior dream, and that dream lies
-                within another, and so on, to infinity, which is the number of grains of sand. The
-                path that you are to take is endless, and you will die before you have truly
-                awakened.
+                You have wakened not out of sleep, but into a prior dream, and
+                that dream lies within another, and so on, to infinity, which is
+                the number of grains of sand. The path that you are to take is
+                endless, and you will die before you have truly awakened.
               </span>
               <br />- Jorge Luis Borges
             </blockquote>
@@ -391,10 +425,10 @@ export default function ReactWrapBalancer() {
           b={
             <blockquote class="item">
               <Balancer>
-                You have wakened not out of sleep, but into a prior dream, and that dream lies
-                within another, and so on, to infinity, which is the number of grains of sand. The
-                path that you are to take is endless, and you will die before you have truly
-                awakened.
+                You have wakened not out of sleep, but into a prior dream, and
+                that dream lies within another, and so on, to infinity, which is
+                the number of grains of sand. The path that you are to take is
+                endless, and you will die before you have truly awakened.
               </Balancer>
               <br />- Jorge Luis Borges
             </blockquote>
@@ -402,7 +436,8 @@ export default function ReactWrapBalancer() {
         />
         <h3>
           <Balancer>
-            Makes multi-line content more compact with fewer visual changes when resizing
+            Makes multi-line content more compact with fewer visual changes when
+            resizing
           </Balancer>
         </h3>
         <p class="headline">
@@ -414,9 +449,10 @@ export default function ReactWrapBalancer() {
             "font-size": "14",
           }}
         >
-          It is worth to mention that this project is a workaround for the lack of native support
-          for balanced text wrapping in CSS. It is not perfect as it adds some performance overhead.
-          However, the performance impact is usually very trivial and can be ignored in most cases.
+          It is worth to mention that this project is a workaround for the lack
+          of native support for balanced text wrapping in CSS. It is not perfect
+          as it adds some performance overhead. However, the performance impact
+          is usually very trivial and can be ignored in most cases.
         </p>
         <p
           style={{
@@ -432,8 +468,8 @@ export default function ReactWrapBalancer() {
           >
             source3
           </a>
-          ) is done by measuring the script execution time of X balanced titles when loading the
-          webpage (
+          ) is done by measuring the script execution time of X balanced titles
+          when loading the webpage (
           <a
             href="https://gist.github.com/shuding/1554c7bf31efb389c9960758e9f27274"
             target="_blank"
@@ -452,10 +488,11 @@ export default function ReactWrapBalancer() {
             "font-size": "14",
           }}
         >
-          It shows that when there are less than 100 elements with React Wrap Balancer in the
-          initial HTML, the per-element impact to the page load time is less than 0.25 ms. When
-          there are 1,000 elements, that number increases to ~1 ms. When there are 5,000 elements,
-          the per-element script execution time becomes ~7 ms.
+          It shows that when there are less than 100 elements with React Wrap
+          Balancer in the initial HTML, the per-element impact to the page load
+          time is less than 0.25 ms. When there are 1,000 elements, that number
+          increases to ~1 ms. When there are 5,000 elements, the per-element
+          script execution time becomes ~7 ms.
         </p>
         <p
           style={{
@@ -463,10 +500,11 @@ export default function ReactWrapBalancer() {
             "font-size": "14",
           }}
         >
-          These numbers don’t scale linearly because re-layouts usually have an impact to other
-          elements on the page. Hence the best practice is to only use this library for title
-          elements when necessary, or use it for content that is behind user interactions (e.g.
-          tooltips), to avoid negative impacts to the page performance.
+          These numbers don’t scale linearly because re-layouts usually have an
+          impact to other elements on the page. Hence the best practice is to
+          only use this library for title elements when necessary, or use it for
+          content that is behind user interactions (e.g. tooltips), to avoid
+          negative impacts to the page performance.
         </p>
         <p class="headline">
           <Balancer>About React Wrap Balancer</Balancer>
@@ -485,7 +523,11 @@ export default function ReactWrapBalancer() {
               balance-text
             </a>{" "}
             project, NYT’s{" "}
-            <a href="https://github.com/nytimes/text-balancer" target="_blank" rel="noreferrer">
+            <a
+              href="https://github.com/nytimes/text-balancer"
+              target="_blank"
+              rel="noreferrer"
+            >
               text-balancer
             </a>{" "}
             project, and Daniel Aleksandersen’s{" "}
@@ -512,11 +554,19 @@ export default function ReactWrapBalancer() {
         <p style={{ "text-align": "center", "font-size": "14" }}>
           <Balancer>
             Special thanks to{" "}
-            <a href="https://twitter.com/emilkowalski_" target="_blank" rel="noreferrer">
+            <a
+              href="https://twitter.com/emilkowalski_"
+              target="_blank"
+              rel="noreferrer"
+            >
               Emil Kowalski
             </a>{" "}
             for testing and feedback. Created by{" "}
-            <a href="https://twitter.com/shuding_" target="_blank" rel="noreferrer">
+            <a
+              href="https://twitter.com/shuding_"
+              target="_blank"
+              rel="noreferrer"
+            >
               Shu Ding
             </a>{" "}
             in 2023, released under the MIT license.

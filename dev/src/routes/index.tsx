@@ -1,10 +1,12 @@
+import { A } from "@solidjs/router";
 import { createSignal } from "solid-js";
 import { Balancer } from "../../../src";
-import { A } from "@solidjs/router";
 
 export default function HomePage() {
   const [width, setWidth] = createSignal(339);
-  const [text, setText] = createSignal("The quick brown fox jumps over the lazy dog");
+  const [text, setText] = createSignal(
+    "The quick brown fox jumps over the lazy dog"
+  );
   const widthString = () => `${width()}px`;
 
   return (
