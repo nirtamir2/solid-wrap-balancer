@@ -29,10 +29,6 @@
     "start": "solid-start start",
     "type-check": "tsc --noEmit"
   },
-  "lint-staged": {
-    "*.{ts,tsx,md}": "eslint --cache --fix",
-    "*.{ts,tsx,css,html,md}": "prettier --write"
-  },
   "dependencies": {
     "solid-wrap-balancer": "../",
     "@solidjs/meta": "^0.28.2",

@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "extends": [
+    "nirtamir2",
+    "nirtamir2/recommended",
+    "nirtamir2/typescript",
+    "nirtamir2/solid",
+    "nirtamir2/security",
+    "nirtamir2/i18n"
+  ],
+  "overrides": [
+    {
+      "files": "src/index.tsx",
+      "rules": {
+        "unicorn/prefer-math-trunc": "off",
+        "@typescript-eslint/init-declarations": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "etc/prefer-interface": "off",
+        "no-implicit-coercion": "off",
+        "no-restricted-globals": "off",
+        "import/no-unused-modules": "off",
+        "solid/no-innerhtml": "off",
+        "security/detect-object-injection": "off",
+        "@typescript-eslint/no-dynamic-delete": "off",
+        "github/no-dataset": "off"
+      }
+    },
+    {
+      "files": ["vite.config.ts"],
+      "rules": {
+        "import/no-unused-modules": "off"
+      }
+    }
+  ]
+}

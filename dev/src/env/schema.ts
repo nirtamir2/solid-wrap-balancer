@@ -1,9 +1,7 @@
 import { z } from "zod";
 
 export const serverScheme = z.object({
-  NODE_ENV: z
-    .enum(["development", "production", "test"])
-    .default("development"),
+  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   VERCEL_URL: z.string().optional(),
   PORT: z
     .string()

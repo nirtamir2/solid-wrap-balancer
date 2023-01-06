@@ -32,6 +32,5 @@ pnpm add solid-wrap-balancer
 Use it:
 
 ```tsx
-import Balancer from 'solid-wrap-balancer'
-
+import Balancer from "solid-wrap-balancer";
 ```

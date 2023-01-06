@@ -3,9 +3,7 @@ import { Balancer } from "../../../src";
 
 export default function WrapBalancerPage() {
   const [width, setWidth] = createSignal(339);
-  const [text, setText] = createSignal(
-    "The quick brown fox jumps over the lazy dog"
-  );
+  const [text, setText] = createSignal("The quick brown fox jumps over the lazy dog");
   const widthString = () => `${width()}px`;
 
   return (

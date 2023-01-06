@@ -1,4 +1,5 @@
 {
+  "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
     "strict": true,
     "target": "ESNext",
@@ -17,5 +18,5 @@
     "baseUrl": "."
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "dev"]
 }

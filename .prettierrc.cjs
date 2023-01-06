@@ -6,7 +6,7 @@ module.exports = {
   ],
   pluginSearchDirs: false, // for prettier-plugin-tailwindcss to work with other plugins
   // @see https://github.com/tailwindlabs/prettier-plugin-tailwindcss#resolving-your-tailwind-configuration
-  tailwindConfig: "./tailwind.config.cjs",
+  tailwindConfig: "./dev/tailwind.config.cjs",
   // @see https://github.com/trivago/prettier-plugin-sort-imports
   importOrder: [
     "^react$",

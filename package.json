@@ -39,23 +39,35 @@
     "test": "echo \"test not setup\"",
     "build": "rollup -c",
     "prepublishOnly": "pnpm build",
-    "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,tsx,jsx}\"",
     "update-deps": "taze -w && pnpm i",
-    "typecheck": "tsc --noEmit"
+    "format": "prettier \"**/*\" --write --ignore-unknown",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint --max-warnings 0 --fix \"src/**/*.{ts,tsx,js,jsx}\""
   },
-  "dependencies": {},
   "peerDependencies": {
     "solid-js": ">=1.0.0"
   },
+  "lint-staged": {
+    "*.{ts,tsx,md}": "eslint --cache --fix",
+    "*.{ts,tsx,css,html,md}": "prettier --write"
+  },
   "devDependencies": {
-    "prettier": "2.7.1",
-    "rollup": "^2.77.2",
-    "rollup-preset-solid": "^1.4.0",
-    "typescript": "^4.7.4",
-    "solid-js": "^1.4.8",
-    "taze": "^0.7.6",
-    "vite": "^3.0.4",
-    "vite-plugin-solid": "^2.3.0"
+    "eslint": "^8.31.0",
+    "eslint-config-nirtamir2": "^0.0.46",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.1",
+    "lint-staged": "^13.1.0",
+    "prettier-plugin-packagejson": "^2.3.0",
+    "prettier-plugin-tailwindcss": "^0.2.1",
+    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
+    "@tsconfig/strictest": "^1.0.2",
+    "rollup": "^3.9.1",
+    "rollup-preset-solid": "^2.0.1",
+    "solid-js": "^1.6.8",
+    "taze": "^0.8.5",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4",
+    "vite-plugin-solid": "^2.5.0"
   },
   "keywords": [
     "solid"
