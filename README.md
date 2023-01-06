@@ -1,36 +1,37 @@
 <p>
-  <img width="100%" src="https://assets.solidjs.com/banner?type={{name_of_lib}}&background=tiles&project=%20" alt="{{name_of_lib}}">
+  <img width="100%" src="https://assets.solidjs.com/banner?type=solid-wrap-balancer&background=tiles&project=%20" alt="solid-wrap-balancer">
 </p>
 
-# {{name_of_lib}}
+# solid-wrap-balancer
 
 [![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg?style=for-the-badge&logo=pnpm)](https://pnpm.io/)
 
-{{desc_of_lib}}
+Simple Solid.js Component That Makes Titles More Readable
 
-> **Note** After using this template, you have to search and replace all `{{name_of_lib}}` and similar strings
+> **Note** After using this template, you have to search and replace all `solid-wrap-balancer` and similar strings
 > with appropriate texts.
 >
-> `{{name_of_lib}}` should be a **kebab-case** string representing the name of you monorepo.
+> `solid-wrap-balancer` should be a **kebab-case** string representing the name of you monorepo.
 >
-> `{{desc_of_lib}}` should be a **Normal case** string with the description of the repository.
+> `Simple Solid.js Component That Makes Titles More Readable` should be a **Normal case** string with the description of the repository.
 >
-> `{{me}}` should be a **kebab-case** string from your profile URL.
+> `nirtamir2` should be a **kebab-case** string from your profile URL.
 
 ## Quick start
 
 Install it:
 
 ```bash
-npm i {{name_of_lib}}
+npm i solid-wrap-balancer
 # or
-yarn add {{name_of_lib}}
+yarn add solid-wrap-balancer
 # or
-pnpm add {{name_of_lib}}
+pnpm add solid-wrap-balancer
 ```
 
 Use it:
 
 ```tsx
-import {{name_of_lib}} from '{{name_of_lib}}'
+import Balancer from 'solid-wrap-balancer'
+
 ```

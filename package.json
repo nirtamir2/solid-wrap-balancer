@@ -1,17 +1,17 @@
 {
   "version": "0.0.0",
-  "name": "{{name_of_lib}}",
-  "description": "{{desc_of_lib}}",
+  "name": "solid-wrap-balancer",
+  "description": "Simple Solid.js Component That Makes Titles More Readable",
   "license": "MIT",
-  "author": "{{me}}",
+  "author": "nirtamir2",
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/{{me}}/{{name_of_lib}}.git"
+    "url": "git+https://github.com/nirtamir2/solid-wrap-balancer.git"
   },
-  "homepage": "https://github.com/{{me}}/{{name_of_lib}}#readme",
+  "homepage": "https://github.com/nirtamir2/solid-wrap-balancer#readme",
   "bugs": {
-    "url": "https://github.com/{{me}}/{{name_of_lib}}/issues"
+    "url": "https://github.com/nirtamir2/solid-wrap-balancer/issues"
   },
   "private": false,
   "sideEffects": false,
