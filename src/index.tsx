@@ -7,6 +7,7 @@ import {
   mergeProps,
   onCleanup,
   splitProps,
+  createSignal,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
@@ -123,33 +124,34 @@ export function Balancer(_props: BalancerProps) {
 
   const id = createUniqueId();
 
-  // eslint-disable-next-line prefer-const
-  let wrapperRef: WrapperHTMLElement | null = null;
+  const [wrapperRef, setWrapperRef] = createSignal<WrapperHTMLElement | undefined>();
 
   const hasProvider = useContext(BalancerContext);
 
   // Re-balance on content change and on mount/hydration.
   createEffect(() => {
-    if (wrapperRef == null) {
+    const wrapper = wrapperRef();
+    if (wrapper == null) {
       return;
     }
     // Re-assign the function here as the component can be dynamically rendered, and script tag won't work in that case.
-    (self[SYMBOL_KEY] = relayout)(0, props.ratio, wrapperRef);
+    (self[SYMBOL_KEY] = relayout)(0, props.ratio, wrapper);
   });
 
   // Remove the observer when unmounting.
   onCleanup(() => {
-    if (wrapperRef == null) {
+    const wrapper = wrapperRef();
+    if (wrapper == null) {
       return;
     }
 
-    const resizeObserver = wrapperRef[SYMBOL_OBSERVER_KEY];
+    const resizeObserver = wrapper[SYMBOL_OBSERVER_KEY];
     if (resizeObserver == null) {
       return;
     }
 
     resizeObserver.disconnect();
-    delete wrapperRef[SYMBOL_OBSERVER_KEY];
+    delete wrapper[SYMBOL_OBSERVER_KEY];
   });
 
   return (
@@ -157,7 +159,7 @@ export function Balancer(_props: BalancerProps) {
       <Dynamic
         component={props.as}
         {...restProps}
-        ref={wrapperRef}
+        ref={setWrapperRef}
         data-br={id}
         data-brr={props.ratio}
         style={{
