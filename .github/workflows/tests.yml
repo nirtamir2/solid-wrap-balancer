@@ -40,4 +40,4 @@ jobs:
           CI: true
 
       - name: Typecheck
-        run: pnpm run typecheck
+        run: pnpm run type-check
