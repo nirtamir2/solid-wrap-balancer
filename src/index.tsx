@@ -107,7 +107,7 @@ const createScriptElement = (injected: boolean, suffix = "") => (
  * Balancer components can share it.
  */
 const BalancerContext = createContext<boolean>(false);
-export const Provider: Component<{
+export const BalancerProvider: Component<{
   children?: JSX.Element;
 }> = (props) => {
   return (
