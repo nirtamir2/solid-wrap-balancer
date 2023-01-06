@@ -1,20 +1,26 @@
-import { Component, createUniqueId, JSX, JSXElement } from "solid-js";
-import { useContext } from "solid-js";
-import { createContext } from "solid-js";
-import { createEffect, mergeProps, onCleanup, splitProps } from "solid-js";
+import type { Component, JSX, JSXElement } from "solid-js";
+import {
+  createUniqueId,
+  useContext,
+  createContext,
+  createEffect,
+  mergeProps,
+  onCleanup,
+  splitProps,
+} from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 interface BalancerProps extends JSX.HTMLAttributes<HTMLElement> {
   /**
    * The HTML tag to use for the wrapper element.
-   * @default 'span'
+   * @defaultValue 'span'
    */
   as?: keyof JSX.IntrinsicElements;
   /**
-   * The balance ratio of the wrapper width (0 <= ratio <= 1).
+   * The balance ratio of the wrapper width (0 ≤ ratio ≤ 1).
    * 0 means the wrapper width is the same as the container width (no balance, browser default).
    * 1 means the wrapper width is the minimum (full balance, most compact).
-   * @default 1
+   * @defaultValue 1
    */
   ratio?: number;
   children?: JSXElement;
@@ -28,9 +34,7 @@ type WrapperHTMLElement = HTMLElement & {
   dataset: { brr?: number };
 };
 
-interface RelayoutFn {
-  (id: string | number, ratio: number, Wrapper?: WrapperHTMLElement): void;
-}
+type RelayoutFn = (id: number | string, ratio: number, Wrapper?: WrapperHTMLElement) => void;
 
 declare global {
   interface Window {
@@ -49,7 +53,7 @@ const relayout: RelayoutFn = (
     return;
   }
 
-  const update = (width: number) => (wrapper.style.maxWidth = width + "px");
+  const update = (width: number) => (wrapper.style.maxWidth = `${width}px`);
 
   // Reset wrapper width
   wrapper.style.maxWidth = "";
@@ -81,19 +85,19 @@ const relayout: RelayoutFn = (
   // Create a new observer if we don't have one.
   // Note that we must inline the key here as we use `toString()` to serialize
   // the function.
-  if (!wrapper["__wrap_o"]) {
-    (wrapper["__wrap_o"] = new ResizeObserver(() => {
-      self.__wrap_b(0, +wrapper.dataset["brr"]!, wrapper);
+  if (wrapper.__wrap_o == null) {
+    (wrapper.__wrap_o = new ResizeObserver(() => {
+      self.__wrap_b(0, +wrapper.dataset.brr!, wrapper);
     })).observe(container);
   }
 };
 
 const RELAYOUT_STR = relayout.toString();
 
-const createScriptElement = (injected: boolean, suffix?: string) => (
+const createScriptElement = (injected: boolean, suffix = "") => (
   <script
     // Calculate the balance initially for SSR
-    innerHTML={(injected ? "" : `self.${SYMBOL_KEY}=${RELAYOUT_STR};`) + (suffix || "")}
+    innerHTML={(injected ? "" : `self.${SYMBOL_KEY}=${RELAYOUT_STR};`) + suffix}
   />
 );
 
@@ -106,7 +110,7 @@ export const Provider: Component<{
   children?: JSX.Element;
 }> = (props) => {
   return (
-    <BalancerContext.Provider value={true}>
+    <BalancerContext.Provider value>
       {createScriptElement(false)}
       {props.children}
     </BalancerContext.Provider>
@@ -118,6 +122,8 @@ export function Balancer(_props: BalancerProps) {
   const [props, restProps] = splitProps(mergedProps, ["as", "ratio", "children"]);
 
   const id = createUniqueId();
+
+  // eslint-disable-next-line prefer-const
   let wrapperRef: WrapperHTMLElement | null = null;
 
   const hasProvider = useContext(BalancerContext);
@@ -151,13 +157,13 @@ export function Balancer(_props: BalancerProps) {
       <Dynamic
         component={props.as}
         {...restProps}
+        ref={wrapperRef}
         data-br={id}
         data-brr={props.ratio}
-        ref={wrapperRef}
         style={{
           display: "inline-block",
-          verticalAlign: "top",
-          textDecoration: "inherit",
+          "vertical-align": "top",
+          "text-decoration": "inherit",
         }}
       >
         {props.children}
