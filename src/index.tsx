@@ -1,4 +1,4 @@
-import type { Component, JSX, JSXElement } from "solid-js";
+import { Component, createUniqueId, JSX, JSXElement } from "solid-js";
 import { useContext } from "solid-js";
 import { createContext } from "solid-js";
 import { createEffect, mergeProps, onCleanup, splitProps } from "solid-js";
@@ -41,7 +41,7 @@ declare global {
 const relayout: RelayoutFn = (
   id,
   ratio,
-  wrapper = document.querySelector<WrapperHTMLElement>(`[data-br="${id}"]`)!
+  wrapper = document.querySelector<WrapperHTMLElement>(`[data-br="${id}"]`)!,
 ) => {
   const container = wrapper.parentElement!;
 
@@ -89,9 +89,7 @@ const RELAYOUT_STR = relayout.toString();
 const createScriptElement = (injected: boolean, suffix?: string) => (
   <script
     // Calculate the balance initially for SSR
-    innerHTML={
-      (injected ? "" : `self.${SYMBOL_KEY}=${RELAYOUT_STR};`) + (suffix || "")
-    }
+    innerHTML={(injected ? "" : `self.${SYMBOL_KEY}=${RELAYOUT_STR};`) + (suffix || "")}
   />
 );
 
@@ -113,13 +111,9 @@ const Provider: Component<{
 
 function Balancer(_props: BalancerProps) {
   const mergedProps = mergeProps({ as: "span", ratio: 1 }, _props);
-  const [props, restProps] = splitProps(mergedProps, [
-    "as",
-    "ratio",
-    "children",
-  ]);
+  const [props, restProps] = splitProps(mergedProps, ["as", "ratio", "children"]);
 
-  const id = Math.random();
+  const id = createUniqueId();
 
   let wrapperRef: WrapperHTMLElement = null!;
 
@@ -156,10 +150,7 @@ function Balancer(_props: BalancerProps) {
       >
         {props.children}
       </Dynamic>
-      {createScriptElement(
-        hasProvider,
-        `self.${SYMBOL_KEY}("${id}",${props.ratio})`
-      )}
+      {createScriptElement(hasProvider, `self.${SYMBOL_KEY}("${id}",${props.ratio})`)}
     </>
   );
 }
