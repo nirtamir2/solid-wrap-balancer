@@ -35,9 +35,9 @@ function Comparison(_props: {
   b: JSX.Element;
   align?: "left" | "start";
 }) {
-  const [myWidth, setMyWidth] = createSignal(0.55);
+  const [width, setWidth] = createSignal(55);
   const styles = createSpring(() => ({
-    width: myWidth(),
+    width: width() / 100,
   }));
   const props = mergeProps({ align: "left" }, _props);
   return (
@@ -45,9 +45,9 @@ function Comparison(_props: {
       <div class="controller">
         <input
           type="range"
-          defaultValue="55"
+          value={width()}
           onInput={(e) => {
-            setMyWidth(+e.currentTarget.value / 100);
+            setWidth(+e.currentTarget.value);
           }}
         />
       </div>
@@ -103,13 +103,9 @@ function Comparison(_props: {
 
 function Ratio() {
   const [ratio, setRatio] = createSignal(0.65);
-  const [currentRatio, setCurrentRatio] = createSignal(0.65);
 
   createSpring({
-    from: { r: 0.65 },
-    onChange(prop) {
-      setCurrentRatio(prop.value.r);
-    },
+    from: { r: ratio() },
   });
 
   return (
@@ -117,9 +113,12 @@ function Ratio() {
       <div class="controller">
         <input
           type="range"
-          defaultValue="65"
+          min={0}
+          step={0.1}
+          max={1}
+          value={ratio()}
           onInput={(e) => {
-            setRatio(Number(e.currentTarget.value) / 100);
+            setRatio(Number(e.currentTarget.value));
           }}
         />
       </div>
@@ -137,7 +136,7 @@ function Ratio() {
               </Balancer>
             </h2>
             <h2 class="ratio-title">
-              <Balancer ratio={currentRatio()}>
+              <Balancer ratio={ratio()}>
                 The quick brown fox jumps over the lazy dog
               </Balancer>
             </h2>
@@ -247,7 +246,7 @@ export default function ReactWrapBalancer() {
             <span class="code">{`<Balancer>`}</span>:
           </span>
           <code>
-            {highlightedCode`import { ${"Balancer"} } from ${"'react-wrap-balancer'"}\n\n// ...\n\n<h1>\n  ${"<Balancer>My Title</Balancer>"}\n</h1>`}
+            {highlightedCode`import { ${"Balancer"} } from ${"'solid-wrap-balancer'"}\n\n// ...\n\n<h1>\n  ${"<Balancer>My Title</Balancer>"}\n</h1>`}
           </code>
           <span>
             If you have multiple <span class="code">{`<Balancer>`}</span>{" "}
@@ -257,7 +256,7 @@ export default function ReactWrapBalancer() {
             HTML size:
           </span>
           <code>
-            {highlightedCode`import { ${"BalancerProvider"} } from ${"'react-wrap-balancer'"}\n\n// ...\n\n${"<BalancerProvider>"}\n  <App/>\n${"</BalancerProvider>"}`}
+            {highlightedCode`import { ${"BalancerProvider"} } from ${"'solid-wrap-balancer'"}\n\n// ...\n\n${"<BalancerProvider>"}\n  <App/>\n${"</BalancerProvider>"}`}
           </code>
         </p>
         <div class="p">
@@ -359,7 +358,7 @@ export default function ReactWrapBalancer() {
                 <TooltipArrowIcon />
               </div>
               <div class="tooltip-trigger">
-                <TooltipTriggerIcon width={16} fill="currentColor" />
+                <TooltipTriggerIcon width={16} />
               </div>
             </div>
           )}
@@ -377,7 +376,7 @@ export default function ReactWrapBalancer() {
                 <TooltipArrowIcon />
               </div>
               <div class="tooltip-trigger">
-                <TooltipTriggerIcon />
+                <TooltipTriggerIcon width={16} />
               </div>
             </div>
           )}
@@ -570,31 +569,6 @@ export default function ReactWrapBalancer() {
             in 2023, released under the MIT license.
           </Balancer>
         </p>
-        {/*<p*/}
-        {/*  class="headline"*/}
-        {/*  style={{*/}
-        {/*    "font-size": "20",*/}
-        {/*    "margin-bottom": "100",*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  <a*/}
-        {/*    href="https://vercel.com"*/}
-        {/*    target="_blank"*/}
-        {/*    style={{*/}
-        {/*      display: "inline-flex",*/}
-        {/*      "justify-content": "center",*/}
-        {/*      "align-items": "center",*/}
-        {/*      gap: ".4rem",*/}
-        {/*      "text-decoration": "none",*/}
-        {/*      "white-space": "nowrap",*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <span>Deployed on</span>*/}
-        {/*    <svg height="1.1em" viewBox="0 0 284 65" style={{ "margin-top": 2 }}>*/}
-        {/*      <path d="M141.68 16.25c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm117.14-14.5c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm-39.03 3.5c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9v-46h9zM37.59.25l36.95 64H.64l36.95-64zm92.38 5l-27.71 48-27.71-48h10.39l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10v14.8h-9v-34h9v9.2c0-5.08 5.91-9.2 13.2-9.2z"></path>*/}
-        {/*    </svg>*/}
-        {/*  </a>*/}
-        {/*</p>*/}
       </main>
     </BalancerProvider>
   );

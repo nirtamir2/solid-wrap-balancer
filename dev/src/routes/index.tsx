@@ -3,6 +3,7 @@ import { createSignal } from "solid-js";
 import { Balancer } from "solid-wrap-balancer";
 
 export default function HomePage() {
+  const [ratio, setRatio] = createSignal(1);
   const [width, setWidth] = createSignal(339);
   const [text, setText] = createSignal(
     "The quick brown fox jumps over the lazy dog"
@@ -13,8 +14,9 @@ export default function HomePage() {
     <div class="flex h-screen w-full flex-col items-center justify-center gap-10">
       <div>
         <div>
-          <div class="p-2">{widthString()}</div>
+          <label for="width-range">{widthString()}</label>
           <input
+            id="width-range"
             type="range"
             min={100}
             max={500}
@@ -23,8 +25,22 @@ export default function HomePage() {
               setWidth(Number.parseInt(e.currentTarget.value));
             }}
           />
+          <label for="ratio-range">{ratio().toFixed(2)}</label>
+
           <input
-            type="text"
+            id="ratio-range"
+            type="range"
+            min={0}
+            step={0.1}
+            max={1}
+            value={ratio()}
+            onInput={(e) => {
+              setRatio(Number.parseFloat(e.currentTarget.value));
+            }}
+          />
+          <label for="texteditor">Text</label>
+          <textarea
+            id="textEditor"
             value={text()}
             onInput={(e) => {
               setText(e.currentTarget.value);
@@ -36,7 +52,7 @@ export default function HomePage() {
         <div>
           <h3>Balancer</h3>
           <div style={{ width: widthString() }} class="border text-xl">
-            <Balancer>{text()}</Balancer>
+            <Balancer ratio={ratio()}>{text()}</Balancer>
           </div>
         </div>
         <div>
