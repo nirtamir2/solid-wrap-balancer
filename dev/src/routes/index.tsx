@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { createSignal } from "solid-js";
-import { Balancer } from "../../../src";
+import { Balancer } from "solid-wrap-balancer";
 
 export default function HomePage() {
   const [width, setWidth] = createSignal(339);

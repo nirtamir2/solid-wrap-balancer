@@ -44,6 +44,7 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
+    "solid-wrap-balancer": "^0.0.2",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@tsconfig/strictest": "^1.0.2",
     "autoprefixer": "^10.4.13",
