@@ -1,12 +1,12 @@
 import copy from "copy-to-clipboard";
 import { JSX, Show, createSignal, mergeProps } from "solid-js";
 import { animated, createSpring } from "solid-spring";
+import { Balancer, BalancerProvider } from "solid-wrap-balancer";
 import Copiedcon from "~/assets/copied.svg";
 import CopyIcon from "~/assets/copy.svg";
 import GithubIcon from "~/assets/github.svg";
 import TooltipArrowIcon from "~/assets/tooltip-arrow.svg";
 import TooltipTriggerIcon from "~/assets/tooltip-tigger.svg";
-import { Balancer, BalancerProvider } from "solid-wrap-balancer";
 
 const content = (
   <>
