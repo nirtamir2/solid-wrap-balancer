@@ -1,5 +1,6 @@
 import copy from "copy-to-clipboard";
-import { JSX, Show, createSignal, mergeProps } from "solid-js";
+import type { JSX} from "solid-js";
+import { Show, createSignal, mergeProps } from "solid-js";
 import { animated, createSpring } from "solid-spring";
 import { Balancer, BalancerProvider } from "solid-wrap-balancer";
 import Copiedcon from "~/assets/copied.svg";
@@ -47,7 +48,7 @@ function Comparison(_props: {
           type="range"
           value={width()}
           onInput={(e) => {
-            setWidth(+e.currentTarget.value);
+            setWidth(Number(e.currentTarget.value));
           }}
         />
       </div>

@@ -74,7 +74,7 @@ const relayout: RelayoutFn = (
 
   if (width) {
     while (left + 1 < right) {
-      middle = ~~((left + right) / 2);
+      middle = Math.trunc((left + right) / 2);
       update(middle);
       if (container.clientHeight === height) {
         right = middle;
@@ -92,7 +92,7 @@ const relayout: RelayoutFn = (
   // the function.
   if (wrapper.__wrap_o == null) {
     (wrapper.__wrap_o = new ResizeObserver(() => {
-      window.__wrap_b(0, +wrapper.dataset.brr!, wrapper);
+      window.__wrap_b(0, Number(wrapper.dataset.brr), wrapper);
     })).observe(container);
   }
 };
@@ -102,7 +102,9 @@ const RELAYOUT_STR = relayout.toString();
 const createScriptElement = (injected: boolean, suffix = "") => (
   <script
     // Calculate the balance initially for SSR
-    innerHTML={(injected ? "" : `window.${SYMBOL_KEY}=${RELAYOUT_STR};`) + suffix}
+    innerHTML={
+      (injected ? "" : `window.${SYMBOL_KEY}=${RELAYOUT_STR};`) + suffix
+    }
   />
 );
 
