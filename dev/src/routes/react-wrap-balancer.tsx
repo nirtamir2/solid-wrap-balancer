@@ -1,5 +1,3 @@
-"use client";
-
 import copy from "copy-to-clipboard";
 import { JSX, Show, createSignal, mergeProps } from "solid-js";
 import { animated, createSpring } from "solid-spring";

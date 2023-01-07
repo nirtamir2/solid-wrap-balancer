@@ -21,7 +21,7 @@
   "author": "nirtamir2",
   "type": "module",
   "scripts": {
-    "build": "solid-start build && pnpm run postbuild",
+    "build": "solid-start build",
     "dev": "solid-start dev",
     "format": "prettier \"**/*\" --write --ignore-unknown",
     "postinstall": "node add-ts-nocheck.cjs",
