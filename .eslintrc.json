@@ -17,7 +17,6 @@
         "@typescript-eslint/no-non-null-assertion": "off",
         "etc/prefer-interface": "off",
         "no-implicit-coercion": "off",
-        "no-restricted-globals": "off",
         "import/no-unused-modules": "off",
         "solid/no-innerhtml": "off",
         "security/detect-object-injection": "off",

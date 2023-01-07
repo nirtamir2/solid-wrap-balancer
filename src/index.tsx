@@ -92,7 +92,7 @@ const relayout: RelayoutFn = (
   // the function.
   if (wrapper.__wrap_o == null) {
     (wrapper.__wrap_o = new ResizeObserver(() => {
-      self.__wrap_b(0, +wrapper.dataset.brr!, wrapper);
+      window.__wrap_b(0, +wrapper.dataset.brr!, wrapper);
     })).observe(container);
   }
 };
@@ -102,7 +102,7 @@ const RELAYOUT_STR = relayout.toString();
 const createScriptElement = (injected: boolean, suffix = "") => (
   <script
     // Calculate the balance initially for SSR
-    innerHTML={(injected ? "" : `self.${SYMBOL_KEY}=${RELAYOUT_STR};`) + suffix}
+    innerHTML={(injected ? "" : `window.${SYMBOL_KEY}=${RELAYOUT_STR};`) + suffix}
   />
 );
 
@@ -145,7 +145,7 @@ export function Balancer(_props: BalancerProps) {
       return;
     }
     // Re-assign the function here as the component can be dynamically rendered, and script tag won't work in that case.
-    (self[SYMBOL_KEY] = relayout)(0, props.ratio, wrapper);
+    (window[SYMBOL_KEY] = relayout)(0, props.ratio, wrapper);
   });
 
   // Remove the observer when unmounting.
@@ -182,7 +182,7 @@ export function Balancer(_props: BalancerProps) {
       </Dynamic>
       {createScriptElement(
         hasProvider,
-        `self.${SYMBOL_KEY}("${id}",${props.ratio})`
+        `window.${SYMBOL_KEY}("${id}",${props.ratio})`
       )}
     </>
   );
