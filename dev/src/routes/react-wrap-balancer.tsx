@@ -34,7 +34,7 @@ function highlightedCode(fades: Array<string>, ...highlighted: Array<string>) {
 function Comparison(_props: {
   a: JSX.Element;
   b: JSX.Element;
-  align?: "left" | "start";
+  align?: "left" | "start" | "center";
 }) {
   const [width, setWidth] = createSignal(55);
   const styles = createSpring(() => ({
@@ -60,7 +60,7 @@ function Comparison(_props: {
           ),
           "text-align": props.align,
         }}
-        className="demo"
+        class="demo"
       >
         <div>
           <legend>Default</legend>
@@ -70,7 +70,7 @@ function Comparison(_props: {
           <legend>With Balancer</legend>
           {props.b}
         </div>
-      </animated.div>{" "}
+      </animated.div>
     </div>
   );
 }
@@ -190,11 +190,11 @@ export default function ReactWrapBalancer() {
             Balancer
           </a>
         </div>
-        <p class="headline">
+        <div class="break headline">
           <Balancer>
             Simple React Component That Makes Titles More Readable
           </Balancer>
-        </p>
+        </div>
         <Comparison
           align="center"
           a={
@@ -223,10 +223,10 @@ export default function ReactWrapBalancer() {
             React Wrap Balancer avoids single hanging word on the last line
           </Balancer>
         </h3>
-        <p class="headline">
+        <div class="break headline">
           <Balancer>Getting Started</Balancer>
-        </p>
-        <p>
+        </div>
+        <div class="break">
           <label>Installation</label>
           <code
             class="installation"
@@ -259,8 +259,8 @@ export default function ReactWrapBalancer() {
               </Show>
             </span>
           </code>
-        </p>
-        <p>
+        </div>
+        <div class="break">
           <label>Usage</label>
           <span>
             The simplest way is to wrap the text content with{" "}
@@ -279,7 +279,7 @@ export default function ReactWrapBalancer() {
           <code>
             {highlightedCode`import { ${"BalancerProvider"} } from ${"'solid-wrap-balancer'"}\n\n// ...\n\n${"<BalancerProvider>"}\n  <App/>\n${"</BalancerProvider>"}`}
           </code>
-        </p>
+        </div>
         <div class="p">
           <label>Features</label>
           <ul>
@@ -315,11 +315,11 @@ export default function ReactWrapBalancer() {
             </li>
           </ul>
         </div>
-        <p>
+        <div class="break">
           <label>Requirements</label>
           This library requires React ≥ 18.0.0, and IE 11 is not supported.
-        </p>
-        <p>
+        </div>
+        <div class="break">
           <a
             href="https://github.com/shuding/react-wrap-balancer"
             target="_blank"
@@ -332,10 +332,10 @@ export default function ReactWrapBalancer() {
               GitHub
             </span>
           </a>
-        </p>
-        <p class="headline">
+        </div>
+        <div class="break headline">
           <Balancer>Custom Balance Ratio</Balancer>
-        </p>
+        </div>
         <Ratio />
         <h3>
           <Balancer>
@@ -344,16 +344,16 @@ export default function ReactWrapBalancer() {
             (compact, the default)
           </Balancer>
         </h3>
-        <p class="headline">
+        <div class="break headline">
           <Balancer>How Does It Work?</Balancer>
-        </p>
-        <p>
+        </div>
+        <div class="break">
           React Wrap Balancer reduces the width of the content wrapper as much
           as it could, before causing an extra line break. When reaching the
           minimum width, each line will approximately have the same width, and
           look more compact and balanced.
-        </p>
-        <p>
+        </div>
+        <div class="break">
           Check out the{" "}
           <a
             href="https://github.com/shuding/react-wrap-balancer"
@@ -363,10 +363,10 @@ export default function ReactWrapBalancer() {
             GitHub Repository
           </a>{" "}
           to lear3 more.
-        </p>
-        <p class="headline">
+        </div>
+        <div class="break headline">
           <Balancer>Use Cases</Balancer>
-        </p>
+        </div>
         <ComparisonWithWidth
           a={(width) => (
             <div class="tooltip-container">
@@ -458,10 +458,10 @@ export default function ReactWrapBalancer() {
             resizing
           </Balancer>
         </h3>
-        <p class="headline">
+        <div class="break headline">
           <Balancer>Performance Impact</Balancer>
-        </p>
-        <p
+        </div>
+        <div class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -471,8 +471,8 @@ export default function ReactWrapBalancer() {
           of native support for balanced text wrapping in CSS. It is not perfect
           as it adds some performance overhead. However, the performance impact
           is usually very trivial and can be ignored in most cases.
-        </p>
-        <p
+        </div>
+        <div class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -496,11 +496,11 @@ export default function ReactWrapBalancer() {
             raw dat3
           </a>
           ):
-        </p>
+        </div>
         <a href="/bench.svg" target="_blank" class="benchmark">
           <img src="/bench.svg" alt="Benchmark result" />
         </a>
-        <p
+        <div class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -511,8 +511,8 @@ export default function ReactWrapBalancer() {
           time is less than 0.25 ms. When there are 1,000 elements, that number
           increases to ~1 ms. When there are 5,000 elements, the per-element
           script execution time becomes ~7 ms.
-        </p>
-        <p
+        </div>
+        <div class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -523,11 +523,11 @@ export default function ReactWrapBalancer() {
           only use this library for title elements when necessary, or use it for
           content that is behind user interactions (e.g. tooltips), to avoid
           negative impacts to the page performance.
-        </p>
-        <p class="headline">
+        </div>
+        <div class="break headline">
           <Balancer>About React Wrap Balancer</Balancer>
-        </p>
-        <p
+        </div>
+        <div class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -568,8 +568,8 @@ export default function ReactWrapBalancer() {
             </span>{" "}
             proposal.
           </Balancer>
-        </p>
-        <p style={{ "text-align": "center", "font-size": "14" }}>
+        </div>
+        <div class="break" style={{ "text-align": "center", "font-size": "14" }}>
           <Balancer>
             Special thanks to{" "}
             <a
@@ -589,7 +589,7 @@ export default function ReactWrapBalancer() {
             </a>{" "}
             in 2023, released under the MIT license.
           </Balancer>
-        </p>
+        </div>
       </main>
     </BalancerProvider>
   );

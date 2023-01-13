@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+.break {
+  word-break: break-word;
+}
+
 p,
 h1,
 h2 {
