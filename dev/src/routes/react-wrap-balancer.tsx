@@ -1,13 +1,13 @@
 import copy from "copy-to-clipboard";
-import type { JSX} from "solid-js";
+import type { JSX } from "solid-js";
 import { Show, createSignal, mergeProps } from "solid-js";
 import { animated, createSpring } from "solid-spring";
-import { Balancer, BalancerProvider } from "../../../src";
 import Copiedcon from "~/assets/copied.svg";
 import CopyIcon from "~/assets/copy.svg";
 import GithubIcon from "~/assets/github.svg";
 import TooltipArrowIcon from "~/assets/tooltip-arrow.svg";
 import TooltipTriggerIcon from "~/assets/tooltip-tigger.svg";
+import { Balancer, BalancerProvider } from "../../../src";
 
 const content = (
   <>
@@ -53,52 +53,71 @@ function Comparison(_props: {
         />
       </div>
       {/* TODO: fix it*/}
-      <Show
-        keyed
-        when={typeof props.a === "function"}
-        fallback={
-          <animated.div
-            style={{
-              width: styles().width.to(
-                (v) => `calc(${v * 100}% + ${1 - v} * var(--w0))`
-              ),
-              "text-align": props.align,
-            }}
-            class="demo"
-          >
-            <div>
-              <legend>Default</legend>
-              {props.a}
-            </div>
-            <div>
-              <legend>With Balancer</legend>
-              {props.b}
-            </div>
-          </animated.div>
-        }
+      <animated.div
+        style={{
+          width: styles().width.to(
+            (v) => `calc(${v * 100}% + ${1 - v} * var(--w0))`
+          ),
+          "text-align": props.align,
+        }}
+        className="demo"
       >
-        <div
-          style={{ width: `calc(55% + 144px)`, "text-align": props.align }}
-          class="demo"
-        >
-          <div>
-            <legend>Default</legend>
-            {props.a(
-              styles().width.to(
-                (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
-              )
-            )}
-          </div>
-          <div>
-            <legend>With Balancer</legend>
-            {props.b(
-              styles().width.to(
-                (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
-              )
-            )}
-          </div>
+        <div>
+          <legend>Default</legend>
+          {props.a}
         </div>
-      </Show>
+        <div>
+          <legend>With Balancer</legend>
+          {props.b}
+        </div>
+      </animated.div>{" "}
+    </div>
+  );
+}
+
+function ComparisonWithWidth(_props: {
+  a: (width: string) => JSX.Element;
+  b: (width: string) => JSX.Element;
+  align?: "left" | "start";
+}) {
+  const [width, setWidth] = createSignal(55);
+  const styles = createSpring(() => ({
+    width: width() / 100,
+  }));
+  const props = mergeProps({ align: "left" }, _props);
+  return (
+    <div class="demo-container">
+      <div class="controller">
+        <input
+          type="range"
+          value={width()}
+          onInput={(e) => {
+            setWidth(Number(e.currentTarget.value));
+          }}
+        />
+      </div>
+      {/* TODO: fix it*/}
+      <div
+        style={{ width: `calc(55% + 144px)`, "text-align": props.align }}
+        class="demo"
+      >
+        <div>
+          <legend>Default</legend>
+          {props.a(
+            styles().width.to(
+              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
+            )
+          )}
+        </div>
+        <div>
+          <legend>With Balancer</legend>
+          {props.b(
+            styles().width.to(
+              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -348,7 +367,7 @@ export default function ReactWrapBalancer() {
         <p class="headline">
           <Balancer>Use Cases</Balancer>
         </p>
-        <Comparison
+        <ComparisonWithWidth
           a={(width) => (
             <div class="tooltip-container">
               <div class="TooltipContent">
