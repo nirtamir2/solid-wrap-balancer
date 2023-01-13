@@ -2,7 +2,7 @@ import copy from "copy-to-clipboard";
 import type { JSX} from "solid-js";
 import { Show, createSignal, mergeProps } from "solid-js";
 import { animated, createSpring } from "solid-spring";
-import { Balancer, BalancerProvider } from "solid-wrap-balancer";
+import { Balancer, BalancerProvider } from "../../../src";
 import Copiedcon from "~/assets/copied.svg";
 import CopyIcon from "~/assets/copy.svg";
 import GithubIcon from "~/assets/github.svg";
@@ -52,6 +52,7 @@ function Comparison(_props: {
           }}
         />
       </div>
+      {/* TODO: fix it*/}
       <Show
         keyed
         when={typeof props.a === "function"}

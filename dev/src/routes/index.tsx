@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { createSignal } from "solid-js";
-import { Balancer } from "solid-wrap-balancer";
+import { Balancer } from "../../../src";
 
 export default function HomePage() {
   const [ratio, setRatio] = createSignal(1);
