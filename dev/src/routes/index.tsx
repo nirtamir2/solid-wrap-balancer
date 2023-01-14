@@ -219,6 +219,27 @@ export default function Index() {
         <div class="break headline">
           <Balancer>Getting Started</Balancer>
         </div>
+        <div style={{ "text-align": "center" }}>
+          <Balancer>
+            This is a port of{" "}
+            <a
+              href="https://github.com/shuding/react-wrap-balancer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              react-wrap-balancer
+            </a>{" "}
+            made by{" "}
+            <a
+              href="https://twitter.com/shuding_"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Shu Ding
+            </a>
+            .
+          </Balancer>
+        </div>
         <div class="break">
           <label>Installation</label>
           <code
@@ -524,7 +545,23 @@ export default function Index() {
           }}
         >
           <Balancer>
-            This project was inspired by Adobe’s{" "}
+            This is a port of{" "}
+            <a
+              href="https://github.com/shuding/react-wrap-balancer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              react-wrap-balancer
+            </a>{" "}
+            made by{" "}
+            <a
+              href="https://twitter.com/shuding_"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Shu Ding
+            </a>
+            . This project was inspired by Adobe’s{" "}
             <a href=" https://github.com/adobe/balance-text" target="_blank">
               balance-text
             </a>{" "}
@@ -555,39 +592,6 @@ export default function Index() {
               </a>
             </span>{" "}
             proposal.
-          </Balancer>
-        </div>
-        <div
-          class="break"
-          style={{ "text-align": "center", "font-size": "14" }}
-        >
-          <Balancer>
-            Ported by{" "}
-            <a
-              href="https://github.com/nirtamir2"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Nir Tamir
-            </a>
-            . Special thanks to{" "}
-            <a
-              href="https://twitter.com/shuding_"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Shu Ding
-            </a>{" "}
-            - the creator of
-            <a
-              href="https://github.com/shuding/react-wrap-balancer"
-              target="_blank"
-              rel="noreferrer"
-            >
-              react-wrap-balancer
-            </a>{" "}
-            that I ported his library here. Made in 2023, released under the MIT
-            license.
           </Balancer>
         </div>
       </main>

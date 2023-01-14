@@ -135,17 +135,6 @@ h3 {
   font-weight: 400;
 }
 
-h3 > span::before {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 0.35em solid transparent;
-  border-right: 0.35em solid transparent;
-  border-bottom: 0.6em solid currentColor;
-  display: inline-block;
-  margin-right: 0.4em;
-}
-
 h3 + .headline {
   margin-top: 10px;
 }
