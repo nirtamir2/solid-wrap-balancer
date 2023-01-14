@@ -36,7 +36,7 @@ function highlightedCode(
 function Comparison(_props: {
   a: JSX.Element;
   b: JSX.Element;
-  align?: "left" | "start" | "center";
+  align?: "center" | "left" | "start";
 }) {
   const [width, setWidth] = createSignal(0.55);
   const props = mergeProps({ align: "left" as const }, _props);
@@ -382,7 +382,7 @@ export default function Index() {
                 <TooltipArrowIcon />
               </div>
               <div class="tooltip-trigger">
-                <TooltipTriggerIcon width={"16px"} />
+                <TooltipTriggerIcon width="16px" />
               </div>
             </div>
           )}
@@ -400,7 +400,7 @@ export default function Index() {
                 <TooltipArrowIcon />
               </div>
               <div class="tooltip-trigger">
-                <TooltipTriggerIcon width={"16px"} />
+                <TooltipTriggerIcon width="16px" />
               </div>
             </div>
           )}

@@ -12,6 +12,8 @@ This project is a port of [react-wrap-balancer](https://github.com/shuding/react
 
 Simple Solid.js Component That Makes Titles More Readable
 
+![Example](/example.png)
+
 ## Introduction
 
 [**Solid Wrap Balancer**](https://solid-wrap-balancer.vercel.app) is a simple Solid Component that makes your titles more readable in different viewport sizes. It improves the wrapping to avoid situations like a single word in the last line, makes the content more “balanced”:
@@ -69,6 +71,6 @@ For full documentation and use cases, please visit [**solid-wrap-balancer.vercel
 
 This project is a port of [react-wrap-balancer](https://github.com/shuding/react-wrap-balancer) made by [Shu Ding](https://twitter.com/shuding_) to solid.js
 
-
 ## Flow
+
 If there is a context - it initialize it with realyout function. The Rebalancer init script for each element, but if it has a context - it uses its existing relayout function from the global window context. In SSR it inject hte ratio prop to the element. When the component load it search for the script and call it with the component id. The script is a resizable observer that try to rebalance text according to ratio. If Decrease it's with to see if the height changes and go to the smallest width that the height keep the same. When unmount / ratio changes - clean observer and element function.
