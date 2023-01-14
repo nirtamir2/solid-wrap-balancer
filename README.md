@@ -12,6 +12,8 @@ This project is a port of [react-wrap-balancer](https://github.com/shuding/react
 
 Simple Solid.js Component That Makes Titles More Readable
 
+![Example](/example.png)
+
 ## Introduction
 
 [**Solid Wrap Balancer**](https://solid-wrap-balancer.vercel.app) is a simple Solid Component that makes your titles more readable in different viewport sizes. It improves the wrapping to avoid situations like a single word in the last line, makes the content more “balanced”:

@@ -32,14 +32,10 @@
   "dependencies": {
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.6.0",
-    "@trpc/client": "10.7.0",
-    "@trpc/server": "10.7.0",
     "copy-to-clipboard": "^3.3.3",
     "solid-devtools": "^0.24.7",
     "solid-js": "^1.6.8",
-    "solid-spring": "^0.0.7",
     "solid-start": "^0.2.11",
-    "solid-start-trpc": "^0.0.16",
     "undici": "5.14.0",
     "zod": "^3.20.2"
   },

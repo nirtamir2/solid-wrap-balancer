@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+.break {
+  word-break: break-word;
+}
+
 p,
 h1,
 h2 {
@@ -129,17 +133,6 @@ h3 {
   margin: 30px 0 80px;
   color: #888;
   font-weight: 400;
-}
-
-h3 > span::before {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 0.35em solid transparent;
-  border-right: 0.35em solid transparent;
-  border-bottom: 0.6em solid currentColor;
-  display: inline-block;
-  margin-right: 0.4em;
 }
 
 h3 + .headline {
@@ -364,6 +357,8 @@ h2 {
 }
 
 .tooltip-trigger {
+  display: flex;
+  justify-content: center;
   margin-top: 120px;
   margin-bottom: 10px;
   padding: 4px;
