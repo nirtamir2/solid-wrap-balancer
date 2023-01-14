@@ -368,6 +368,8 @@ h2 {
 }
 
 .tooltip-trigger {
+  display: flex;
+  justify-content: center;
   margin-top: 120px;
   margin-bottom: 10px;
   padding: 4px;

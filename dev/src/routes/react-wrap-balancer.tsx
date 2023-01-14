@@ -1,7 +1,6 @@
 import copy from "copy-to-clipboard";
 import type { JSX } from "solid-js";
 import { Show, createSignal, mergeProps } from "solid-js";
-import { animated, createSpring } from "solid-spring";
 import Copiedcon from "~/assets/copied.svg";
 import CopyIcon from "~/assets/copy.svg";
 import GithubIcon from "~/assets/github.svg";
@@ -36,15 +35,15 @@ function Comparison(_props: {
   b: JSX.Element;
   align?: "left" | "start" | "center";
 }) {
-  const [width, setWidth] = createSignal(55);
-  const styles = createSpring(() => ({
-    width: width() / 100,
-  }));
+  const [width, setWidth] = createSignal(0.55);
   const props = mergeProps({ align: "left" }, _props);
   return (
     <div class="demo-container">
       <div class="controller">
         <input
+          min={0}
+          max={1}
+          step={0.05}
           type="range"
           value={width()}
           onInput={(e) => {
@@ -53,11 +52,9 @@ function Comparison(_props: {
         />
       </div>
       {/* TODO: fix it*/}
-      <animated.div
+      <div
         style={{
-          width: styles().width.to(
-            (v) => `calc(${v * 100}% + ${1 - v} * var(--w0))`
-          ),
+          width: `calc(${width() * 100}% + ${1 - width()} * var(--w0))`,
           "text-align": props.align,
         }}
         class="demo"
@@ -70,7 +67,7 @@ function Comparison(_props: {
           <legend>With Balancer</legend>
           {props.b}
         </div>
-      </animated.div>
+      </div>
     </div>
   );
 }
@@ -80,16 +77,16 @@ function ComparisonWithWidth(_props: {
   b: (width: string) => JSX.Element;
   align?: "left" | "start";
 }) {
-  const [width, setWidth] = createSignal(55);
-  const styles = createSpring(() => ({
-    width: width() / 100,
-  }));
+  const [width, setWidth] = createSignal(0.55);
   const props = mergeProps({ align: "left" }, _props);
   return (
     <div class="demo-container">
       <div class="controller">
         <input
           type="range"
+          min={0}
+          step={0.05}
+          max={1}
           value={width()}
           onInput={(e) => {
             setWidth(Number(e.currentTarget.value));
@@ -104,17 +101,17 @@ function ComparisonWithWidth(_props: {
         <div>
           <legend>Default</legend>
           {props.a(
-            styles().width.to(
-              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 1 * v}px)`
-            )
+            `calc(${width()} * var(--w1) + ${
+              150 * (1 - width()) - 1 * width()
+            }px)`
           )}
         </div>
         <div>
           <legend>With Balancer</legend>
           {props.b(
-            styles().width.to(
-              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 1 * v}px)`
-            )
+            `calc(${width()} * var(--w1) + ${
+              150 * (1 - width()) - 1 * width()
+            }px)`
           )}
         </div>
       </div>
@@ -124,10 +121,6 @@ function ComparisonWithWidth(_props: {
 
 function Ratio() {
   const [ratio, setRatio] = createSignal(0.65);
-
-  createSpring({
-    from: { r: ratio() },
-  });
 
   return (
     <div class="demo-container">
@@ -143,7 +136,7 @@ function Ratio() {
           }}
         />
       </div>
-      <div class="demo" style={{ width: "480", "max-width": "100%" }}>
+      <div class="demo" style={{ width: "460px", "max-width": "100%" }}>
         <div
           style={{
             "text-align": "center",
@@ -361,33 +354,33 @@ export default function ReactWrapBalancer() {
           a={(width) => (
             <div class="tooltip-container">
               <div class="TooltipContent">
-                <animated.div style={{ width }}>
+                <div style={{ width }}>
                   <div class="tooltip item">
                     This deployment is currently in progress. <a>Read more</a>.
                   </div>
-                </animated.div>
+                </div>
                 <TooltipArrowIcon />
               </div>
               <div class="tooltip-trigger">
-                <TooltipTriggerIcon width={16} />
+                <TooltipTriggerIcon width={"16px"} />
               </div>
             </div>
           )}
           b={(width) => (
             <div class="tooltip-container">
               <div class="TooltipContent">
-                <animated.div style={{ width }}>
+                <div style={{ width }}>
                   <div class="tooltip item">
                     <Balancer>
                       This deployment is currently in progress. <a>Read more</a>
                       .
                     </Balancer>
                   </div>
-                </animated.div>
+                </div>
                 <TooltipArrowIcon />
               </div>
               <div class="tooltip-trigger">
-                <TooltipTriggerIcon width={16} />
+                <TooltipTriggerIcon width={"16px"} />
               </div>
             </div>
           )}
@@ -499,7 +492,7 @@ export default function ReactWrapBalancer() {
             "font-size": "14",
           }}
         >
-          It shows that when there are less than 100 elements with React Wrap
+          It shows that when there are less than 100 elements with Solid Wrap
           Balancer in the initial HTML, the per-element impact to the page load
           time is less than 0.25 ms. When there are 1,000 elements, that number
           increases to ~1 ms. When there are 5,000 elements, the per-element
@@ -519,7 +512,7 @@ export default function ReactWrapBalancer() {
           negative impacts to the page performance.
         </div>
         <div class="break headline">
-          <Balancer>About React Wrap Balancer</Balancer>
+          <Balancer>About Solid Wrap Balancer</Balancer>
         </div>
         <div
           class="break"
@@ -569,7 +562,7 @@ export default function ReactWrapBalancer() {
           style={{ "text-align": "center", "font-size": "14" }}
         >
           <Balancer>
-            Created by{" "}
+            Ported by{" "}
             <a
               href="https://github.com/nirtamir2"
               target="_blank"
