@@ -105,7 +105,7 @@ function ComparisonWithWidth(_props: {
           <legend>Default</legend>
           {props.a(
             styles().width.to(
-              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
+              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 1 * v}px)`
             )
           )}
         </div>
@@ -113,7 +113,7 @@ function ComparisonWithWidth(_props: {
           <legend>With Balancer</legend>
           {props.b(
             styles().width.to(
-              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 31 * v}px)`
+              (v) => `calc(${v} * var(--w1) + ${150 * (1 - v) - 1 * v}px)`
             )
           )}
         </div>
@@ -178,12 +178,12 @@ export default function ReactWrapBalancer() {
       <main>
         <div class="logo-container">
           <a
-            href="https://github.com/shuding/react-wrap-balancer"
+            href="https://github.com/nirtamir2/solid-wrap-balancer"
             target="_blank"
             class="logo"
             rel="noreferrer"
           >
-            React
+            Solid
             <br />
             Wrap
             <br />
@@ -192,7 +192,7 @@ export default function ReactWrapBalancer() {
         </div>
         <div class="break headline">
           <Balancer>
-            Simple React Component That Makes Titles More Readable
+            Simple Solid.js Component That Makes Titles More Readable
           </Balancer>
         </div>
         <Comparison
@@ -220,7 +220,7 @@ export default function ReactWrapBalancer() {
         />
         <h3>
           <Balancer>
-            React Wrap Balancer avoids single hanging word on the last line
+            Solid Wrap Balancer avoids single hanging word on the last line
           </Balancer>
         </h3>
         <div class="break headline">
@@ -234,7 +234,7 @@ export default function ReactWrapBalancer() {
               pointerPos = { x: e.clientX, y: e.clientY };
             }}
             onClick={(e) => {
-              let text: string | undefined = "npm install react-wrap-balancer";
+              let text: string | undefined = "npm install solid-wrap-balancer";
 
               // Only copy the selected text if the pointer is moved
               if (
@@ -252,7 +252,7 @@ export default function ReactWrapBalancer() {
               }, 2000);
             }}
           >
-            npm install react-wrap-balancer
+            npm install solid-wrap-balancer
             <span class="copy">
               <Show keyed when={copying() > 0} fallback={<Copiedcon />}>
                 <CopyIcon />
@@ -283,7 +283,7 @@ export default function ReactWrapBalancer() {
         <div class="p">
           <label>Features</label>
           <ul>
-            <li>0.95 kB Gzipped</li>
+            <li>Small bundle size</li>
             <li>Fast O(log n) algorithm</li>
             <li>
               Doesn’t cause{" "}
@@ -292,24 +292,14 @@ export default function ReactWrapBalancer() {
               </a>
             </li>
             <li>Works perfectly with web fonts</li>
+            <li>SSR and streaming SSR supported</li>
             <li>
-              SSR and{" "}
               <a
-                href="https://beta.nextjs.org/docs/data-fetching/streaming-and-suspense"
+                href="https://start.solidjs.com"
                 target="_blank"
                 rel="noreferrer"
               >
-                streaming SSR
-              </a>{" "}
-              supported
-            </li>
-            <li>
-              <a
-                href="https://beta.nextjs.org/docs/rendering/server-and-client-components"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Next.js 13 app directory and React Server Components
+                SolidStart
               </a>{" "}
               compatible
             </li>
@@ -317,16 +307,16 @@ export default function ReactWrapBalancer() {
         </div>
         <div class="break">
           <label>Requirements</label>
-          This library requires React ≥ 18.0.0, and IE 11 is not supported.
+          This library requires Solid.js, and IE 11 is not supported.
         </div>
         <div class="break">
           <a
-            href="https://github.com/shuding/react-wrap-balancer"
+            href="https://github.com/nirtamir2/solid-wrap-balancer"
             target="_blank"
             class="github-link"
             rel="noreferrer"
           >
-            3<span>View project on</span>
+            <span>View project on</span>
             <span>
               <GithubIcon width="1.1em" />
               GitHub
@@ -348,7 +338,7 @@ export default function ReactWrapBalancer() {
           <Balancer>How Does It Work?</Balancer>
         </div>
         <div class="break">
-          React Wrap Balancer reduces the width of the content wrapper as much
+          Solid Wrap Balancer reduces the width of the content wrapper as much
           as it could, before causing an extra line break. When reaching the
           minimum width, each line will approximately have the same width, and
           look more compact and balanced.
@@ -356,13 +346,13 @@ export default function ReactWrapBalancer() {
         <div class="break">
           Check out the{" "}
           <a
-            href="https://github.com/shuding/react-wrap-balancer"
+            href="https://github.com/nirtamir2/solid-wrap-balancer"
             target="_blank"
             rel="noreferrer"
           >
             GitHub Repository
           </a>{" "}
-          to lear3 more.
+          to learn more.
         </div>
         <div class="break headline">
           <Balancer>Use Cases</Balancer>
@@ -461,7 +451,8 @@ export default function ReactWrapBalancer() {
         <div class="break headline">
           <Balancer>Performance Impact</Balancer>
         </div>
-        <div class="break"
+        <div
+          class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -472,7 +463,8 @@ export default function ReactWrapBalancer() {
           as it adds some performance overhead. However, the performance impact
           is usually very trivial and can be ignored in most cases.
         </div>
-        <div class="break"
+        <div
+          class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -484,7 +476,7 @@ export default function ReactWrapBalancer() {
             target="_blank"
             rel="noreferrer"
           >
-            source3
+            source
           </a>
           ) is done by measuring the script execution time of X balanced titles
           when loading the webpage (
@@ -493,14 +485,15 @@ export default function ReactWrapBalancer() {
             target="_blank"
             rel="noreferrer"
           >
-            raw dat3
+            raw data
           </a>
           ):
         </div>
         <a href="/bench.svg" target="_blank" class="benchmark">
           <img src="/bench.svg" alt="Benchmark result" />
         </a>
-        <div class="break"
+        <div
+          class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -512,7 +505,8 @@ export default function ReactWrapBalancer() {
           increases to ~1 ms. When there are 5,000 elements, the per-element
           script execution time becomes ~7 ms.
         </div>
-        <div class="break"
+        <div
+          class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -527,7 +521,8 @@ export default function ReactWrapBalancer() {
         <div class="break headline">
           <Balancer>About React Wrap Balancer</Balancer>
         </div>
-        <div class="break"
+        <div
+          class="break"
           style={{
             "text-align": "left",
             "font-size": "14",
@@ -569,17 +564,20 @@ export default function ReactWrapBalancer() {
             proposal.
           </Balancer>
         </div>
-        <div class="break" style={{ "text-align": "center", "font-size": "14" }}>
+        <div
+          class="break"
+          style={{ "text-align": "center", "font-size": "14" }}
+        >
           <Balancer>
-            Special thanks to{" "}
+            Created by{" "}
             <a
-              href="https://twitter.com/emilkowalski_"
+              href="https://github.com/nirtamir2"
               target="_blank"
               rel="noreferrer"
             >
-              Emil Kowalski
-            </a>{" "}
-            for testing and feedback. Created by{" "}
+              Nir Tamir
+            </a>
+            . Special thanks to{" "}
             <a
               href="https://twitter.com/shuding_"
               target="_blank"
@@ -587,7 +585,16 @@ export default function ReactWrapBalancer() {
             >
               Shu Ding
             </a>{" "}
-            in 2023, released under the MIT license.
+            - the creator of
+            <a
+              href="https://github.com/shuding/react-wrap-balancer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              react-wrap-balancer
+            </a>{" "}
+            that I ported his library here. Made in 2023, released under the MIT
+            license.
           </Balancer>
         </div>
       </main>
