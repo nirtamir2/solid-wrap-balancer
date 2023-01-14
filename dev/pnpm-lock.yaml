@@ -19,7 +19,6 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.1
   solid-devtools: ^0.24.7
   solid-js: ^1.6.8
-  solid-spring: ^0.0.7
   solid-start: ^0.2.11
   solid-start-node: ^0.2.11
   solid-start-trpc: ^0.0.16
@@ -40,7 +39,6 @@ dependencies:
   copy-to-clipboard: 3.3.3
   solid-devtools: 0.24.7_hfrm4tqrrzcujjixyttunlyf2u
   solid-js: 1.6.8
-  solid-spring: 0.0.7_solid-js@1.6.8
   solid-start: 0.2.11_hfrm4tqrrzcujjixyttunlyf2u
   solid-start-trpc: 0.0.16_rmcrcy2rzasit5v5g43xykyply
   undici: 5.14.0
@@ -6199,14 +6197,6 @@ packages:
       '@babel/helper-module-imports': 7.18.6
       '@babel/types': 7.20.7
       solid-js: 1.6.8
-
-  /solid-spring/0.0.7_solid-js@1.6.8:
-    resolution: {integrity: sha512-/sP/z4nvXYSHH557IRPKN+H33OrnshT89mOlFynMqxbHGKxReut0xTkGrdWysp+mLR7DlqX+vqNJBY4PPtwgyg==}
-    peerDependencies:
-      solid-js: ^1.3.13
-    dependencies:
-      solid-js: 1.6.8
-    dev: false
 
   /solid-start-node/0.2.11_sp7myxm6rxzrac4riakledllqu:
     resolution: {integrity: sha512-wnk+Yif4L+5ipSOURyT9TwoDJYr1RMbT7qjPanxUU7qJNp0JdWiQgK0cJfijYNRGjClGkbyucnXjVbVHh7kYbg==}
