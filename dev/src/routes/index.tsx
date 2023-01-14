@@ -17,7 +17,10 @@ const content = (
 );
 
 // Quick and dirty monochrome code highlighter via string templates, don't use this.
-function highlightedCode(fades: Array<string>, ...highlighted: Array<string>) {
+function highlightedCode(
+  fades: TemplateStringsArray,
+  ...highlighted: Array<string>
+) {
   const elements = [];
 
   for (const fade of fades) {
@@ -36,7 +39,7 @@ function Comparison(_props: {
   align?: "left" | "start" | "center";
 }) {
   const [width, setWidth] = createSignal(0.55);
-  const props = mergeProps({ align: "left" }, _props);
+  const props = mergeProps({ align: "left" as const }, _props);
   return (
     <div class="demo-container">
       <div class="controller">
@@ -78,7 +81,7 @@ function ComparisonWithWidth(_props: {
   align?: "left" | "start";
 }) {
   const [width, setWidth] = createSignal(0.55);
-  const props = mergeProps({ align: "left" }, _props);
+  const props = mergeProps({ align: "left" as const }, _props);
   return (
     <div class="demo-container">
       <div class="controller">
@@ -101,17 +104,13 @@ function ComparisonWithWidth(_props: {
         <div>
           <legend>Default</legend>
           {props.a(
-            `calc(${width()} * var(--w1) + ${
-              150 * (1 - width()) - 1 * width()
-            }px)`
+            `calc(${width()} * var(--w1) + ${150 * (1 - width()) - width()}px)`
           )}
         </div>
         <div>
           <legend>With Balancer</legend>
           {props.b(
-            `calc(${width()} * var(--w1) + ${
-              150 * (1 - width()) - 1 * width()
-            }px)`
+            `calc(${width()} * var(--w1) + ${150 * (1 - width()) - width()}px)`
           )}
         </div>
       </div>
