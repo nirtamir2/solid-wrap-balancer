@@ -12,6 +12,7 @@
     {
       "files": "src/index.tsx",
       "rules": {
+        "github/unescaped-html-literal": "off",
         "unicorn/prefer-math-trunc": "off",
         "@typescript-eslint/init-declarations": "off",
         "@typescript-eslint/no-non-null-assertion": "off",

@@ -1,5 +1,7 @@
 import type { Component, JSX, JSXElement } from "solid-js";
 import {
+  DEV,
+  children,
   createContext,
   createEffect,
   createSignal,
@@ -9,7 +11,7 @@ import {
   splitProps,
   useContext,
 } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { Dynamic, isServer } from "solid-js/web";
 
 interface BalancerProps extends JSX.HTMLAttributes<HTMLElement> {
   /**
@@ -162,6 +164,35 @@ export function Balancer(_props: BalancerProps) {
 
     resizeObserver.disconnect();
     delete wrapper[SYMBOL_OBSERVER_KEY];
+  });
+
+  createEffect(() => {
+    // In development, we check `children`'s type to ensure we are not wrapping
+    // elements like <p> or <h1> inside. Instead <Balancer> should directly
+    // wrap text nodes.
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (DEV != null && !isServer) {
+      const childrenArray = children(() => props.children).toArray();
+      const firstChild = childrenArray[0];
+      if (
+        childrenArray.length === 1 &&
+        firstChild != null &&
+        typeof firstChild === "object" &&
+        "tagName" in firstChild &&
+        typeof firstChild.tagName === "string" &&
+        firstChild.tagName.toLowerCase() !== "span"
+      ) {
+        const tagName = firstChild.tagName.toLowerCase();
+        console.warn(
+          `<Balancer> should not wrap <${tagName}> inside. Instead, it should directly wrap text or inline nodes.
+
+Try changing this:
+  <Balancer><${tagName}>content</${tagName}></Balancer>
+To:
+  <${tagName}><Balancer>content</Balancer></${tagName}>`
+        );
+      }
+    }
   });
 
   return (
