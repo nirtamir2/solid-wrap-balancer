@@ -71,8 +71,8 @@ devDependencies:
     specifier: ^0.2.26
     version: 0.2.26(solid-start@0.2.26)(vite@4.3.9)
   solid-wrap-balancer:
-    specifier: ^0.0.5
-    version: 0.0.5(solid-js@1.7.6)
+    specifier: 0.0.6-alpha.0
+    version: 0.0.6-alpha.0(solid-js@1.7.6)
   tailwindcss:
     specifier: ^3.3.2
     version: 3.3.2
@@ -6281,8 +6281,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /solid-wrap-balancer@0.0.5(solid-js@1.7.6):
-    resolution: {integrity: sha512-ijQjiv2KHJJQj1s4b0NaRjtsaBW814z+33vqUwk0vFyulSMJKIArLcsz/99JR+ZzEbnit6asgGfDbp3ANHbxYg==}
+  /solid-wrap-balancer@0.0.6-alpha.0(solid-js@1.7.6):
+    resolution: {integrity: sha512-EXhLL4dEVmsxCR919VN/9RfBPwqPJyCWMKUcVwQqUIHg38gNCqzo8XBWlBXnxu5S7XGobwwJSdga1q1yWC2BeQ==}
     peerDependencies:
       solid-js: '>=1.0.0'
     dependencies:
