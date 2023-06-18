@@ -26,10 +26,15 @@ interface BalancerProps extends JSX.HTMLAttributes<HTMLElement> {
    * @defaultValue 1
    */
   ratio?: number;
+  /**
+   * The nonce attribute to allowlist inline script injection by the component
+   */
+  nonce?: string;
   children?: JSXElement;
 }
 
 const SYMBOL_KEY = "__wrap_b";
+const SYMBOL_NATIVE_KEY = "__wrap_n";
 const SYMBOL_OBSERVER_KEY = "__wrap_o";
 
 type WrapperHTMLElement = HTMLElement & {
@@ -46,6 +51,11 @@ type RelayoutFn = (
 declare global {
   interface Window {
     [SYMBOL_KEY]: RelayoutFn;
+    // A flag to indicate whether the browser supports text-balancing natively.
+    // undefined: not injected
+    // 1: injected and supported
+    // 2: injected but not supported
+    [SYMBOL_NATIVE_KEY]?: number;
   }
 }
 
@@ -101,12 +111,29 @@ const relayout: RelayoutFn = (
 
 const RELAYOUT_STR = relayout.toString();
 
-const createScriptElement = (injected: boolean, suffix = "") => (
-  <script
-    // Calculate the balance initially for SSR
-    innerHTML={(injected ? "" : `self.${SYMBOL_KEY}=${RELAYOUT_STR};`) + suffix}
-  />
-);
+const isTextWrapBalanceSupported = `(self.CSS&&CSS.supports("text-wrap","balance")?1:2)`;
+
+const createScriptElement = (
+  injected: boolean,
+  nonce?: string,
+  suffix = ""
+) => {
+  if (suffix) {
+    suffix = `self.${SYMBOL_NATIVE_KEY}!=1&&${suffix}`;
+  }
+  return (
+    <script
+      innerHTML={
+        // Calculate the balance initially for SSR
+        (injected
+          ? ""
+          : `self.${SYMBOL_NATIVE_KEY}=self.${SYMBOL_NATIVE_KEY}||${isTextWrapBalanceSupported};self.${SYMBOL_KEY}=${RELAYOUT_STR};`) +
+        suffix
+      }
+      {...(nonce == null ? null : { nonce })}
+    />
+  );
+};
 
 /**
  * An optional provider to inject the global relayout function, so all children
@@ -114,11 +141,15 @@ const createScriptElement = (injected: boolean, suffix = "") => (
  */
 const BalancerContext = createContext<boolean>(false);
 export const BalancerProvider: Component<{
+  /**
+   * The nonce attribute to allowlist inline script injection by the component
+   */
+  nonce?: string;
   children?: JSX.Element;
 }> = (props) => {
   return (
     <BalancerContext.Provider value>
-      {createScriptElement(false)}
+      {createScriptElement(false, props.nonce)}
       {props.children}
     </BalancerContext.Provider>
   );
@@ -130,6 +161,7 @@ export function Balancer(_props: BalancerProps) {
     "as",
     "ratio",
     "children",
+    "nonce",
   ]);
 
   const id = createUniqueId();
@@ -142,6 +174,9 @@ export function Balancer(_props: BalancerProps) {
 
   // Re-balance on content change and on mount/hydration.
   createEffect(() => {
+    // Skip if the browser supports text-balancing natively.
+    if (self[SYMBOL_NATIVE_KEY] === 1) return;
+
     const wrapper = wrapperRef();
     if (wrapper == null) {
       return;
@@ -152,6 +187,9 @@ export function Balancer(_props: BalancerProps) {
 
   // Remove the observer when unmounting.
   onCleanup(() => {
+    // Skip if the browser supports text-balancing natively.
+    if (self[SYMBOL_NATIVE_KEY] === 1) return;
+
     const wrapper = wrapperRef();
     if (wrapper == null) {
       return;
@@ -207,12 +245,14 @@ To:
           display: "inline-block",
           "vertical-align": "top",
           "text-decoration": "inherit",
+          "text-wrap": "balance",
         }}
       >
         {props.children}
       </Dynamic>
       {createScriptElement(
         hasProvider,
+        props.nonce,
         `self.${SYMBOL_KEY}("${id}",${props.ratio})`
       )}
     </>
