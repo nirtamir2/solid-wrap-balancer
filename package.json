@@ -38,7 +38,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup --config rollup.config.ts --configPlugin typescript",
     "dev": "vite serve dev",
     "format": "prettier \"**/*\" --write --ignore-unknown",
     "lint": "eslint --max-warnings 0 --fix \"src/**/*.{ts,tsx,js,jsx}\"",
@@ -52,6 +52,7 @@
     "*.{ts,tsx,css,html,md}": "prettier --write"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@tsconfig/strictest": "^2.0.1",
     "eslint": "^8.43.0",
