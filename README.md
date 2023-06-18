@@ -26,10 +26,6 @@ To start using the library, install it to your project:
 
 ```bash
 npm i solid-wrap-balancer
-# or
-yarn add solid-wrap-balancer
-# or
-pnpm add solid-wrap-balancer
 ```
 
 And wrap text content with it:
@@ -47,6 +43,16 @@ function Title() {
   );
 }
 ```
+
+### `<Balancer>`
+
+`<Balancer>` is the main component of the library. It will automatically balance the text content inside it. It accepts the following props:
+
+- **`as`** (_optional_): The HTML tag to be used to wrap the text content. Default to `span`.
+- **`ratio`** (_optional_): The ratio of “balance-ness”, 0 <= ratio <= 1. Default to `1`.
+- **`nonce`** (_optional_): The [nonce](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce) attribute to allowlist inline script injection by the component.
+
+### `<BalancerProvider>`
 
 If you have multiple `<Balancer>` components used, it’s recommended (but optional) to also use
 `<BalancerProvider>` to wrap the entire app. This will make them share the re-balance logic and reduce the HTML size:
@@ -67,10 +73,33 @@ function App() {
 
 For full documentation and use cases, please visit [**solid-wrap-balancer.vercel.app**](https://solid-wrap-balancer.vercel.app).
 
+## Browser Support Information
+
+Desktop:
+
+| Browser | Min Version |
+| :-----: | :---------: |
+| Chrome  |     64      |
+|  Edge   |     79      |
+| Safari  |    13.1     |
+| FireFox |     69      |
+|  Opera  |     51      |
+|   IE    | No Support  |
+
+Mobile:
+
+|     Browser     | Min Version |
+| :-------------: | :---------: |
+|     Chrome      |     64      |
+|     Safari      |    13.4     |
+|     Firefox     |     69      |
+|      Opera      |     47      |
+| WebView Android |     64      |
+
+Cross-browser compatibility issues are mainly due to the fact that lib uses the ResizeObserver API. More information about this API can be found at this [link](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
+
+If you are using a browser which version is lower than the versions in the table, please consider adding polyfill for this API or upgrade your browser.
+
 ## About
 
 This project is a port of [react-wrap-balancer](https://github.com/shuding/react-wrap-balancer) made by [Shu Ding](https://twitter.com/shuding_) to solid.js
-
-## Flow
-
-If there is a context - it initialize it with realyout function. The Rebalancer init script for each element, but if it has a context - it uses its existing relayout function from the global window context. In SSR it inject hte ratio prop to the element. When the component load it search for the script and call it with the component id. The script is a resizable observer that try to rebalance text according to ratio. If Decrease it's with to see if the height changes and go to the smallest width that the height keep the same. When unmount / ratio changes - clean observer and element function.
