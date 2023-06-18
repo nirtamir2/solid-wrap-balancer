@@ -71,7 +71,7 @@ devDependencies:
     specifier: ^0.2.26
     version: 0.2.26(solid-start@0.2.26)(vite@4.3.9)
   solid-wrap-balancer:
-    specifier: 0.0.6-alpha.0
+    specifier: ^0.0.6-alpha.0
     version: 0.0.6-alpha.0(solid-js@1.7.6)
   tailwindcss:
     specifier: ^3.3.2
