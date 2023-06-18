@@ -1,6 +1,6 @@
 {
   "name": "solid-wrap-balancer",
-  "version": "0.0.5",
+  "version": "0.0.6-alpha.0",
   "private": false,
   "description": "Simple Solid.js Component That Makes Titles More Readable",
   "keywords": [
