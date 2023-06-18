@@ -174,26 +174,28 @@ export function Balancer(_props: BalancerProps) {
 
   // Re-balance on content change and on mount/hydration.
   createEffect(() => {
-    // Skip if the browser supports text-balancing natively.
-    if (self[SYMBOL_NATIVE_KEY] === 1) return;
-
     const wrapper = wrapperRef();
     if (wrapper == null) {
       return;
     }
+
+    // Skip if the browser supports text-balancing natively.
+    if (self[SYMBOL_NATIVE_KEY] === 1) return;
+
     // Re-assign the function here as the component can be dynamically rendered, and script tag won't work in that case.
     (self[SYMBOL_KEY] = relayout)(0, props.ratio, wrapper);
   });
 
   // Remove the observer when unmounting.
   onCleanup(() => {
-    // Skip if the browser supports text-balancing natively.
-    if (self[SYMBOL_NATIVE_KEY] === 1) return;
-
     const wrapper = wrapperRef();
     if (wrapper == null) {
       return;
     }
+
+    // Skip if the browser supports text-balancing natively.
+    if (self[SYMBOL_NATIVE_KEY] === 1) return;
+
 
     const resizeObserver = wrapper[SYMBOL_OBSERVER_KEY];
     if (resizeObserver == null) {
