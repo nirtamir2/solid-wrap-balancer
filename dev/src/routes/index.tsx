@@ -7,6 +7,7 @@ import CopyIcon from "~/assets/copy.svg";
 import GithubIcon from "~/assets/github.svg";
 import TooltipArrowIcon from "~/assets/tooltip-arrow.svg";
 import TooltipTriggerIcon from "~/assets/tooltip-tigger.svg";
+import WarningIcon from "~/assets/warning.svg";
 
 const content = (
   <>
@@ -267,7 +268,7 @@ export default function Index() {
           >
             npm install solid-wrap-balancer
             <span class="copy">
-              <Show keyed when={copying() > 0} fallback={<Copiedcon />}>
+              <Show when={copying() > 0} fallback={<Copiedcon />}>
                 <CopyIcon />
               </Show>
             </span>
@@ -354,29 +355,12 @@ export default function Index() {
             (compact, the default)
           </Balancer>
         </h3>
-        <p
+        <div
           style={{
             position: "relative",
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="#363636"
-            width={18}
-            style={{
-              position: "absolute",
-              right: "100%",
-              "margin-top": "4px",
-              "margin-right": "5px",
-            }}
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <WarningIcon width={18} />
           Note that if the native CSS balance (
           <a
             href="https://developer.chrome.com/blog/css-text-wrap-balance/"
@@ -387,7 +371,7 @@ export default function Index() {
           </a>
           ) is available, Solid Wrap Balancer will use it instead. And the
           `ratio` option will be ignored in that case.
-        </p>
+        </div>
         <div class="break headline">
           <Balancer>How Does It Work?</Balancer>
         </div>
