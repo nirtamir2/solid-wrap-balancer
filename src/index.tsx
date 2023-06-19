@@ -85,6 +85,10 @@ const relayout: RelayoutFn = (
   let middle: number;
 
   if (width) {
+    // Ensure we don't search widths lower than when the text overflows
+    update(lower);
+    lower = Math.max(wrapper.scrollWidth, lower);
+
     while (lower + 1 < upper) {
       middle = Math.round((lower + upper) / 2);
       update(middle);
@@ -103,9 +107,20 @@ const relayout: RelayoutFn = (
   // Note that we must inline the key here as we use `toString()` to serialize
   // the function.
   if (wrapper.__wrap_o == null) {
-    (wrapper.__wrap_o = new ResizeObserver(() => {
-      self.__wrap_b(0, +wrapper.dataset.brr!, wrapper);
-    })).observe(container);
+    if (typeof ResizeObserver === "undefined") {
+      // Silently ignore ResizeObserver for production builds
+      if (DEV != null && !isServer) {
+        console.warn(
+          "The browser you are using does not support the ResizeObserver API. " +
+            "Please consider add polyfill for this API to avoid potential layout shifts or upgrade your browser. " +
+            "Read more: https://github.com/shuding/react-wrap-balancer#browser-support-information"
+        );
+      }
+    } else {
+      (wrapper.__wrap_o = new ResizeObserver(() => {
+        self.__wrap_b(0, +wrapper.dataset.brr!, wrapper);
+      })).observe(container);
+    }
   }
 };
 
@@ -195,7 +210,6 @@ export function Balancer(_props: BalancerProps) {
 
     // Skip if the browser supports text-balancing natively.
     if (self[SYMBOL_NATIVE_KEY] === 1) return;
-
 
     const resizeObserver = wrapper[SYMBOL_OBSERVER_KEY];
     if (resizeObserver == null) {
